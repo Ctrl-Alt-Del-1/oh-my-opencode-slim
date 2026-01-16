@@ -14,6 +14,7 @@ import {
 } from "./tools";
 import { loadPluginConfig } from "./config";
 import { createBuiltinMcps } from "./mcp";
+import { createAutoUpdateCheckerHook } from "./hooks";
 
 const OhMyOpenCodeLite: Plugin = async (ctx) => {
   const config = loadPluginConfig(ctx.directory);
@@ -21,6 +22,12 @@ const OhMyOpenCodeLite: Plugin = async (ctx) => {
   const backgroundManager = new BackgroundTaskManager(ctx);
   const backgroundTools = createBackgroundTools(ctx, backgroundManager);
   const mcps = createBuiltinMcps(config.disabled_mcps);
+
+  // Initialize auto-update checker hook
+  const autoUpdateChecker = createAutoUpdateCheckerHook(ctx, {
+    showStartupToast: true,
+    autoUpdate: true,
+  });
 
   return {
     name: "oh-my-opencode-slim",
@@ -58,6 +65,10 @@ const OhMyOpenCodeLite: Plugin = async (ctx) => {
       } else {
         Object.assign(configMcp, mcps);
       }
+    },
+
+    event: async (input) => {
+      await autoUpdateChecker.event(input);
     },
   };
 };
