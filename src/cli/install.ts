@@ -7,7 +7,6 @@ import {
   getOpenCodeVersion,
   addAuthPlugins,
   addProviderConfig,
-  addServerConfig,
   disableDefaultAgents,
   detectCurrentConfig,
   isTmuxInstalled,
@@ -184,8 +183,6 @@ async function runInstall(config: InstallConfig): Promise<number> {
   // Calculate total steps dynamically
   let totalSteps = 4 // Base: check opencode, add plugin, disable default agents, write lite config
   if (config.hasAntigravity) totalSteps += 2 // auth plugins + provider config
-  // TODO: tmux has a bug, disabled for now
-  // if (config.hasTmux) totalSteps += 1 // server config
 
   let step = 1
 
@@ -210,13 +207,6 @@ async function runInstall(config: InstallConfig): Promise<number> {
     const providerResult = addProviderConfig(config)
     if (!handleStepResult(providerResult, "Providers configured")) return 1
   }
-
-  // TODO: tmux has a bug, disabled for now
-  // if (config.hasTmux) {
-  //   printStep(step++, totalSteps, "Configuring OpenCode HTTP server for tmux...")
-  //   const serverResult = addServerConfig(config)
-  //   if (!handleStepResult(serverResult, "Server configured")) return 1
-  // }
 
   printStep(step++, totalSteps, "Writing oh-my-opencode-slim configuration...")
   const liteResult = writeLiteConfig(config)

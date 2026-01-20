@@ -199,9 +199,9 @@ export async function spawnTmuxPane(
   // This is needed because serverUrl may be a fallback even when no server is running
   const serverRunning = await isServerRunning(serverUrl);
   if (!serverRunning) {
-    log("[tmux] spawnTmuxPane: OpenCode server not running, skipping", { 
+    log("[tmux] spawnTmuxPane: OpenCode server not running, skipping", {
       serverUrl,
-      hint: "Add { \"server\": { \"port\": 4096 } } to your OpenCode config"
+      hint: "Start opencode with --port 4096"
     });
     return { success: false };
   }

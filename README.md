@@ -354,12 +354,13 @@ Code implementation, refactoring, testing, verification. *Execute the plan - no 
 
 #### Quick Setup
 
-1. **Enable the OpenCode HTTP server** in `opencode.json` (see [OpenCode Config](#opencode-config-opencodejson)).
-2. **Enable tmux integration** in `oh-my-opencode-slim.json` (see [Plugin Config](#plugin-config-oh-my-opencode-slimjson)).
-3. **Run OpenCode inside tmux**:
+> ⚠️ **Temporary workaround:** Start OpenCode with `--port 4096` to enable tmux integration. This is required until the upstream issue is resolved.
+
+1. **Enable tmux integration** in `oh-my-opencode-slim.json` (see [Plugin Config](#plugin-config-oh-my-opencode-slimjson)).
+2. **Run OpenCode inside tmux with port 4096**:
    ```bash
    tmux
-   opencode
+   opencode --port 4096
    ```
 
 #### Layout Options
@@ -502,7 +503,7 @@ You can disable specific MCP servers by adding them to the `disabled_mcps` array
 
 | File | Purpose |
 |------|---------|
-| `~/.config/opencode/opencode.json` | OpenCode core settings (server port for tmux) |
+| `~/.config/opencode/opencode.json` | OpenCode core settings |
 | `~/.config/opencode/oh-my-opencode-slim.json` | Plugin settings (agents, tmux, MCPs) |
 | `.opencode/oh-my-opencode-slim.json` | Project-local plugin overrides (optional) |
 
