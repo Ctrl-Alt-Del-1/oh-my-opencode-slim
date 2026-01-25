@@ -32,11 +32,6 @@
   - [Antigravity via CLIProxy Preset](#antigravity-via-cliproxy-preset)
   - [Author's Preset](#authors-preset)
 - [🧩 Skills](#-skills)
-  - [Available Skills](#available-skills)
-  - [Default Skill Assignments](#default-skill-assignments)
-  - [Configuration & Syntax](#configuration--syntax)
-  - [Simplify](#simplify)
-  - [Playwright Integration](#playwright-integration)
 - [🔌 MCP Servers](#-mcp-servers)
   - [MCP Permissions](#mcp-permissions)
   - [Configuration & Syntax](#configuration--syntax-1)
@@ -240,7 +235,7 @@ Then manually create the config files at:
   </tr>
   <tr>
     <td colspan="2">
-      <b>Skills:</b> <code>*</code> (all)
+      <b>Skills:</b> <code>simplify</code> <code>*</code>
     </td>
   </tr>
   <tr>
@@ -428,7 +423,7 @@ Then manually create the config files at:
   </tr>
   <tr>
     <td colspan="2">
-      <b>Skills:</b> <code>playwright</code>
+      <b>Skills:</b> <code>agent-browser</code>
     </td>
   </tr>
   <tr>
@@ -529,7 +524,7 @@ Uses OpenAI models exclusively:
       "oracle": { "model": "openai/gpt-5.2-codex", "variant": "high", "skills": [], "mcps": [] },
       "librarian": { "model": "openai/gpt-5.1-codex-mini", "variant": "low", "skills": [], "mcps": ["websearch", "context7", "grep_app"] },
       "explorer": { "model": "openai/gpt-5.1-codex-mini", "variant": "low", "skills": [], "mcps": [] },
-      "designer": { "model": "openai/gpt-5.1-codex-mini", "variant": "medium", "skills": ["playwright"], "mcps": [] },
+      "designer": { "model": "openai/gpt-5.1-codex-mini", "variant": "medium", "skills": ["agent-browser"], "mcps": [] },
       "fixer": { "model": "openai/gpt-5.1-codex-mini", "variant": "low", "skills": [], "mcps": [] }
     }
   }
@@ -549,7 +544,7 @@ Routes through Antigravity's CLIProxy for Claude + Gemini models:
       "oracle": { "model": "cliproxy/gemini-3-pro-preview", "variant": "high", "skills": [], "mcps": [] },
       "librarian": { "model": "cliproxy/gemini-3-flash-preview", "variant": "low", "skills": [], "mcps": ["websearch", "context7", "grep_app"] },
       "explorer": { "model": "cliproxy/gemini-3-flash-preview", "variant": "low", "skills": [], "mcps": [] },
-      "designer": { "model": "cliproxy/gemini-3-flash-preview", "variant": "medium", "skills": ["playwright"], "mcps": [] },
+      "designer": { "model": "cliproxy/gemini-3-flash-preview", "variant": "medium", "skills": ["agent-browser"], "mcps": [] },
       "fixer": { "model": "cliproxy/gemini-3-flash-preview", "variant": "low", "skills": [], "mcps": [] }
     }
   }
@@ -616,7 +611,7 @@ Mixed setup combining multiple providers:
       "oracle": { "model": "openai/gpt-5.2-codex", "variant": "high", "skills": [], "mcps": [] },
       "librarian": { "model": "cliproxy/gemini-3-flash-preview", "variant": "low", "skills": [], "mcps": ["websearch", "context7", "grep_app"] },
       "explorer": { "model": "cerebras/zai-glm-4.7", "variant": "low", "skills": [], "mcps": [] },
-      "designer": { "model": "cliproxy/gemini-3-flash-preview", "variant": "medium", "skills": ["playwright"], "mcps": [] },
+      "designer": { "model": "cliproxy/gemini-3-flash-preview", "variant": "medium", "skills": ["agent-browser"], "mcps": [] },
       "fixer": { "model": "cerebras/zai-glm-4.7", "variant": "low", "skills": [], "mcps": [] }
     }
   }
@@ -627,37 +622,35 @@ Mixed setup combining multiple providers:
 
 ## 🧩 Skills
 
-Skills are specialized capabilities that agents can use. Each agent has a default set of skills, which you can override in the agent config.
+Skills are specialized capabilities provided by external agents and tools. Unlike MCPs which are servers, skills are prompt-based tool configurations installed via `npx skills add`.
+
+### Installation
+
+The interactive installer will ask to install recommended skills automatically. Behind the scenes, it runs:
+
+```bash
+# Example: Adding the simplify skill
+npx skills add https://github.com/brianlovin/claude-config --skill simplify -a opencode -y --global
+```
 
 ### Available Skills
 
-| Skill | Description |
-|-------|-------------|
-| `simplify` | Code complexity analysis and YAGNI enforcement |
-| `playwright` | Browser automation via Playwright MCP |
-
-### Default Skill Assignments
-
-| Agent | Default Skills |
-|-------|----------------|
-| `orchestrator` | `*` (all skills) |
-| `designer` | `playwright` |
-| `oracle` | none |
-| `librarian` | none |
-| `explorer` | none |
-| `fixer` | none |
+| Skill | Description | Assigned To |
+|-------|-------------|-------------|
+| `simplify` | YAGNI code simplification expert | `orchestrator` |
+| `agent-browser` | High-performance browser automation | `designer` |
 
 ### Configuration & Syntax
 
-You can customize which skills each agent uses by editing your plugin configuration file: `~/.config/opencode/oh-my-opencode-slim.json`.
+You can customize which skills each agent is allowed to use in `~/.config/opencode/oh-my-opencode-slim.json`.
 
 **Syntax:**
 
 | Syntax | Description | Example |
 |--------|-------------|---------|
-| `"*"` | All skills | `["*"]` |
-| `"!item"` | Exclude specific skill | `["*", "!playwright"]` |
-| Explicit list | Only listed skills | `["simplify", "playwright"]` |
+| `"*"` | All installed skills | `["*"]` |
+| `"!item"` | Exclude specific skill | `["*", "!agent-browser"]` |
+| Explicit list | Only listed skills | `["simplify"]` |
 | `"!*"` | Deny all skills | `["!*"]` |
 
 **Rules:**
@@ -673,10 +666,10 @@ You can customize which skills each agent uses by editing your plugin configurat
   "presets": {
     "my-preset": {
       "orchestrator": {
-        "skills": ["*", "!playwright"]
+        "skills": ["*", "!agent-browser"]
       },
       "designer": {
-        "skills": ["playwright", "simplify"]
+        "skills": ["agent-browser", "simplify"]
       }
     }
   }
@@ -687,15 +680,13 @@ You can customize which skills each agent uses by editing your plugin configurat
 
 **The Minimalist's sacred truth: every line of code is a liability.**
 
-Use after major refactors or before finalizing PRs. Identifies unnecessary complexity, challenges premature abstractions, estimates LOC reduction, and enforces minimalism.
+`simplify` is a specialized skill for complexity analysis and YAGNI enforcement. It identifies unnecessary abstractions and suggests minimal implementations.
 
-### Playwright Integration
+### Agent Browser
 
-**Browser automation for visual verification and testing.**
+**External browser automation for visual verification and testing.**
 
-- **Browser Automation**: Full Playwright capabilities (browsing, clicking, typing, scraping).
-- **Screenshots**: Capture visual state of any web page.
-- **Sandboxed Output**: Screenshots saved to session subdirectory (check tool output for path).
+`agent-browser` provides full high-performance browser automation capabilities. It allows agents to browse the web, interact with elements, and capture screenshots for visual state verification.
 
 ---
 
